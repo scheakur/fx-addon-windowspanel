@@ -2,8 +2,8 @@
   "name": "fx-addon-windowspanel",
   "title": "fx-addon-windowspanel",
   "id": "jid1-1npjtppYowW2Kw",
-  "description": "a basic add-on",
-  "author": "",
-  "license": "MPL 2.0",
-  "version": "0.1"
+  "description": "Windows Panel for Firefox",
+  "author": "scheakur <scheakur@gmail.com>",
+  "license": "MIT",
+  "version": "0.1.0"
 }
