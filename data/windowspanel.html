@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <link rel="stylesheet" href="windowspanel.css" charset="utf-8">
+  </head>
+  <body class="windowspanel">
+    <div class="tab-search">
+      <input class="tab-search-box" type="text">
+    </div>
+    <div class="tabs">
+      <table class="inner-tabs">
+        <tbody>
+          <tr
+            v-repeat="tabs"
+            v-on="click: select(this)"
+            class="tab {{active ? 'active' : ''}}">
+            <td class="sign">{{active ? '✓' : ''}}</td>
+            <td class="favicon"><img src="{{favicon}}" width="16px"></td>
+            <td class="title">{{title}}</td>
+            <td v-on="click: close(this)" class="close-button">x</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
