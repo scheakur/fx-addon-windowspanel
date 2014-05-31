@@ -6,8 +6,6 @@ var container = new Vue({
     tabs: []
   },
   methods: {
-    add: function(tab) {
-    },
     remove: function(tab) {
       let i = indexOf(this.$data.tabs, tab);
       if (i >= 0) {
