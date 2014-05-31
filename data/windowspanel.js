@@ -3,9 +3,13 @@ var container = document.querySelector('.windowspanel');
 var container = new Vue({
   el: container,
   data: {
+    query: '',
     tabs: []
   },
   methods: {
+    filter: function() {
+      console.log(this.query);
+    },
     remove: function(tab) {
       let i = indexOf(this.$data.tabs, tab);
       if (i >= 0) {

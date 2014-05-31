@@ -7,7 +7,9 @@
   </head>
   <body class="windowspanel">
     <div class="tab-search">
-      <input class="tab-search-box" type="text">
+      <input class="tab-search-box" type="text"
+        v-model="query"
+        v-on="keyup: filter">
     </div>
     <div class="tabs">
       <table class="inner-tabs">
