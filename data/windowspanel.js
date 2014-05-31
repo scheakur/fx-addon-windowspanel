@@ -1,7 +1,7 @@
-var tabs = document.querySelector('.tabs');
+var container = document.querySelector('.windowspanel');
 
 var container = new Vue({
-  el: tabs,
+  el: container,
   data: {
     tabs: []
   },
