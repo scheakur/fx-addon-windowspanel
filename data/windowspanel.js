@@ -9,7 +9,7 @@ var container = new Vue({
   methods: {
     filter: function() {
       if (this.query === '') {
-        this.$data.tabs.forEach(function(tab) {
+        this.tabs.forEach(function(tab) {
           tab.visible = true;
         });
         return;
@@ -24,13 +24,13 @@ var container = new Vue({
       });
     },
     remove: function(tab) {
-      let i = indexOf(this.$data.tabs, tab);
+      let i = indexOf(this.tabs, tab);
       if (i >= 0) {
-        this.$data.tabs.splice(i, 1);
+        this.tabs.splice(i, 1);
       }
     },
     select: function(tab) {
-      this.$data.tabs.forEach(function(t) {
+      this.tabs.forEach(function(t) {
         t.active = (t.id === tab.id);
       });
       self.port.emit('select', tab.id);
