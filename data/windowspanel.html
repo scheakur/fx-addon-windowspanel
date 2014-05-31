@@ -17,7 +17,7 @@
           <tr
             v-repeat="tabs"
             v-on="click: select(this)"
-            class="tab {{active ? 'active' : ''}}">
+            class="tab {{active ? 'active' : ''}} {{visible ? 'visible' : 'invisible'}}">
             <td class="sign">{{active ? '✓' : ''}}</td>
             <td class="favicon"><img src="{{favicon}}" width="16px"></td>
             <td class="title">{{title}}</td>

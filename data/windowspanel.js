@@ -4,11 +4,24 @@ var container = new Vue({
   el: container,
   data: {
     query: '',
-    tabs: []
+    tabs: [],
   },
   methods: {
     filter: function() {
-      console.log(this.query);
+      if (this.query === '') {
+        this.$data.tabs.forEach(function(tab) {
+          tab.visible = true;
+        });
+        return;
+      }
+      let re = new RegExp(this.query, 'i');
+      this.tabs.forEach(function(tab) {
+        if (re.test(tab.url) || re.test(tab.title)) {
+          tab.visible = true;
+          return;
+        }
+        tab.visible = false;
+      });
     },
     remove: function(tab) {
       let i = indexOf(this.$data.tabs, tab);
