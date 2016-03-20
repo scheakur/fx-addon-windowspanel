@@ -10,10 +10,9 @@ const panel = require('sdk/panel').Panel({
   ],
   position: {
     top: 10,
-    right: 10
   },
   width: 600,
-  height: 600
+  height: 600,
 });
 
 let openPanelPreventer = null;
@@ -68,14 +67,7 @@ function breakPreventer() {
 
 
 function openPanel() {
-  panel.show({
-    width: 600,
-    height: 600,
-    position: {
-      top: 10,
-      right: 10,
-    },
-  });
+  panel.show();
 }
 
 

@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.tab {
+  padding: 5px;
+}
+
+.tab:hover {
+  background-color: #eee;
+}
+
+.search-container {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.search {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
