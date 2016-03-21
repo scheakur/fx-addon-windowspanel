@@ -2,6 +2,7 @@ const tabs = require('sdk/tabs');
 const data = require('sdk/self').data;
 const favicon = require('sdk/places/favicon');
 const timers = require('sdk/timers');
+const { Hotkey } = require('sdk/hotkeys');
 
 const panel = require('sdk/panel').Panel({
   contentURL: data.url('windowspanel.html'),
@@ -14,6 +15,15 @@ const panel = require('sdk/panel').Panel({
   width: 600,
   height: 600,
 });
+
+
+const keyToOpenPanel = Hotkey({
+  combo: 'control-shift-w',
+  onPress: () => {
+    togglePanel();
+  },
+});
+
 
 let openPanelPreventer = null;
 
@@ -63,6 +73,15 @@ function openIsPrevented() {
 function breakPreventer() {
   timers.clearTimeout(openPanelPreventer);
   openPanelPreventer = null;
+}
+
+
+function togglePanel() {
+  if (panel.isShowing) {
+    panel.hide();
+  } else {
+    panel.show();
+  }
 }
 
 
