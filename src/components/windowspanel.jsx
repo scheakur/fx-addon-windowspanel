@@ -154,7 +154,7 @@ export default class WindowsPanel extends Component {
     return (
       <div className="windowspanel">
         <SearchBox ref="search" onSearch={this.search}/>
-        <div>{tabs}</div>
+        <div className="tabs">{tabs}</div>
       </div>
     );
   }
