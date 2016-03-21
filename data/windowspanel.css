@@ -7,6 +7,10 @@
   padding: 5px;
 }
 
+.tab.focused {
+  background-color: #fce4ec;
+}
+
 .tab:hover {
   background-color: #eee;
 }
