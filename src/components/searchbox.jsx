@@ -50,6 +50,10 @@ export default class SearchBox extends Component {
     return this.refs.search.value;
   }
 
+  focus() {
+    this.refs.search.focus();
+  }
+
   render() {
     return (
       <div className="search-container">

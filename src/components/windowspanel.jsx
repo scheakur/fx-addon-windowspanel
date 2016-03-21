@@ -19,6 +19,18 @@ export default class WindowsPanel extends Component {
     });
   }
 
+  componentDidMount() {
+    this.focusSearchBox();
+  }
+
+  componentDidUpdate() {
+    this.focusSearchBox();
+  }
+
+  focusSearchBox() {
+    this.refs.search.focus();
+  }
+
   select(index) {
     const tab = this.state.visibleTabs[index];
     if (!tab) {
