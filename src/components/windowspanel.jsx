@@ -10,6 +10,7 @@ export default class WindowsPanel extends Component {
     this.search = this.search.bind(this);
     this.handleKeys = this.handleKeys.bind(this);
 
+    // TODO handle focused tab index for performance
     this.state = {
       focusedTabId: props.tabs[0].id,
       visibleTabs: props.tabs,
@@ -114,7 +115,7 @@ export default class WindowsPanel extends Component {
       return;
     }
 
-    const code = event.keyCode;
+    // TODO prevent default
     switch (event.keyCode) {
     case 13:
       this.select(this.state.focusedTabId);
