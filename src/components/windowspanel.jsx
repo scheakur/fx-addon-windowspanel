@@ -10,22 +10,12 @@ export default class WindowsPanel extends Component {
     this.search = this.search.bind(this);
     this.handleKeys = this.handleKeys.bind(this);
 
-    const index = this.getActiveTabIndex(props.tabs);
-    this.state = {
-      focusedTabIndex: index,
-      focusedTabId: props.tabs[index].id,
-      visibleTabs: props.tabs,
-    };
+    this.state = this.makeState(props.tabs);
   }
 
   componentWillReceiveProps(props) {
     const tabs = this.filter(props.tabs, this.refs.search.getValue());
-    const index = this.getActiveTabIndex(tabs);
-    this.setState({
-      focusedTabIndex: index,
-      focusedTabId: tabs[index].id,
-      visibleTabs: tabs,
-    });
+    this.setState(this.makeState(tabs));
   }
 
   componentDidMount() {
@@ -41,6 +31,16 @@ export default class WindowsPanel extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('keypress', this.handleKeys);
+  }
+
+
+  makeState(tabs) {
+    const index = this.getActiveTabIndex(tabs);
+    return {
+      focusedTabIndex: index,
+      focusedTabId: tabs[index].id,
+      visibleTabs: tabs,
+    };
   }
 
 
