@@ -10,13 +10,14 @@ export default class WindowsPanel extends Component {
     this.search = this.search.bind(this);
     this.handleKeys = this.handleKeys.bind(this);
 
-    this.state = this.makeState(props.tabs);
+    this.state = this.makeState(props.tabs, props.tabs[0]);
   }
 
   componentWillReceiveProps(props) {
     const tabs = this.filter(props.tabs, this.refs.search.getValue());
-    this.setState(this.makeState(tabs));
+    this.setState(this.makeState(tabs, props.tabs[0]));
   }
+
 
   componentDidMount() {
     this.focusSearchBox();
@@ -35,11 +36,14 @@ export default class WindowsPanel extends Component {
   }
 
 
-  makeState(tabs) {
+  makeState(tabs, fallbackTab) {
     const index = this.getActiveTabIndex(tabs);
+
+    console.log('state', index, tabs.length);
+
     return {
       focusedTabIndex: index,
-      focusedTabId: tabs[index].id,
+      focusedTabId: (tabs[index] || fallbackTab).id,
       visibleTabs: tabs,
     };
   }
@@ -64,11 +68,11 @@ export default class WindowsPanel extends Component {
       return;
     }
 
-    const index = this.getVisibleIndex(this.state.focusedTabId);
+    const index = this.getIndex(visibleTabs, this.state.focusedTabId);
     this.setState({
-      visibleTabs: visibleTabs,
       focusedTabIndex: index,
       focusedTabId: visibleTabs[index].id,
+      visibleTabs: visibleTabs,
     });
   }
 
@@ -118,9 +122,9 @@ export default class WindowsPanel extends Component {
   }
 
 
-  getVisibleIndex(id) {
+  getIndex(tabs, id) {
     let index = 0;
-    for (let tab of this.state.visibleTabs) {
+    for (let tab of tabs) {
       if (tab.id === id) {
         return index;
       }
