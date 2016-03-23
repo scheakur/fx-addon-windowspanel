@@ -115,18 +115,28 @@ export default class WindowsPanel extends Component {
       return;
     }
 
-    // TODO prevent default
-    switch (event.keyCode) {
+    const handled = this._handleKeys(event.keyCode);
+
+    if (handled) {
+      event.preventDefault();
+    }
+  }
+
+
+  _handleKeys(keyCode) {
+    switch (keyCode) {
     case 13:
       this.select(this.state.focusedTabId);
-      return;
+      return true;
     case 38:
       this.focusPrevTab();
-      return;
+      return true;
     case 40:
       this.focusNextTab();
-      return;
+      return true;
     }
+
+    return false;
   }
 
 
