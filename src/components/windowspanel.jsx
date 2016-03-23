@@ -10,8 +10,8 @@ export default class WindowsPanel extends Component {
     this.search = this.search.bind(this);
     this.handleKeys = this.handleKeys.bind(this);
 
-    // TODO handle focused tab index for performance
     this.state = {
+      focusedTabIndex: 0,
       focusedTabId: props.tabs[0].id,
       visibleTabs: props.tabs,
     };
@@ -60,6 +60,7 @@ export default class WindowsPanel extends Component {
     const index = this.getVisibleIndex(this.state.focusedTabId);
     this.setState({
       visibleTabs: visibleTabs,
+      focusedTabIndex: index,
       focusedTabId: visibleTabs[index].id,
     });
   }
@@ -78,17 +79,19 @@ export default class WindowsPanel extends Component {
 
 
   focusNextTab() {
-    const index = this.getVisibleIndex(this.state.focusedTabId);
+    const index = this.state.focusedTabIndex;
     const nextIndex = (index === this.state.visibleTabs.length - 1) ? 0 : index + 1;
     this.setState({
+      focusedTabIndex: nextIndex,
       focusedTabId: this.state.visibleTabs[nextIndex].id,
     });
   }
 
   focusPrevTab() {
-    const index = this.getVisibleIndex(this.state.focusedTabId);
+    const index = this.state.focusedTabIndex;
     const prevIndex = (index === 0) ? this.state.visibleTabs.length - 1 : index - 1;
     this.setState({
+      focusedTabIndex: prevIndex,
       focusedTabId: this.state.visibleTabs[prevIndex].id,
     });
   }
