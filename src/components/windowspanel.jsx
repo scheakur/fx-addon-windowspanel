@@ -26,6 +26,7 @@ export default class WindowsPanel extends Component {
 
   componentDidUpdate() {
     this.focusSearchBox();
+    this.scrollTo(this.state.visibleTabs[this.state.focusedTabIndex]);
   }
 
 
@@ -52,6 +53,7 @@ export default class WindowsPanel extends Component {
   select(id) {
     this.props.emit('select', id);
   }
+
 
   search(text) {
     const visibleTabs = this.filter(this.props.tabs, text);
@@ -86,18 +88,20 @@ export default class WindowsPanel extends Component {
   focusNextTab() {
     const index = this.state.focusedTabIndex;
     const nextIndex = (index === this.state.visibleTabs.length - 1) ? 0 : index + 1;
+    const nextTab = this.state.visibleTabs[nextIndex];
     this.setState({
       focusedTabIndex: nextIndex,
-      focusedTabId: this.state.visibleTabs[nextIndex].id,
+      focusedTabId: nextTab.id,
     });
   }
 
   focusPrevTab() {
     const index = this.state.focusedTabIndex;
     const prevIndex = (index === 0) ? this.state.visibleTabs.length - 1 : index - 1;
+    const prevTab =  this.state.visibleTabs[prevIndex];
     this.setState({
       focusedTabIndex: prevIndex,
-      focusedTabId: this.state.visibleTabs[prevIndex].id,
+      focusedTabId: prevTab.id,
     });
   }
 
@@ -160,6 +164,20 @@ export default class WindowsPanel extends Component {
   }
 
 
+  scrollTo(tab) {
+    this.refs.tabs.scrollTop = this.getPosition(tab);
+  }
+
+
+  getPosition(tab) {
+    const elem = this.refs.tabs.querySelector(`[data-id=tab-${tab.id}]`);
+    if (!elem) {
+      return 0;
+    }
+    return elem.offsetTop - 40;
+  }
+
+
   renderTabs() {
     const focusedId = this.state.focusedTabId;
 
@@ -170,7 +188,7 @@ export default class WindowsPanel extends Component {
       });
 
       return (
-        <div key={`tab-${tab.id}-${index}`} className={className} onClick={this.select.bind(this, tab.id)}>
+        <div key={`tab-${tab.id}`} data-id={`tab-${tab.id}`} className={className} onClick={this.select.bind(this, tab.id)}>
           <div className="favicon"><img src={tab.favicon} width={16} height={16}/></div>
           <div className="title">{tab.title}</div>
           <div className="url">{tab.url}</div>
@@ -185,7 +203,7 @@ export default class WindowsPanel extends Component {
     return (
       <div className="windowspanel">
         <SearchBox ref="search" onSearch={this.search}/>
-        <div className="tabs">{tabs}</div>
+        <div ref="tabs" className="tabs">{tabs}</div>
       </div>
     );
   }
