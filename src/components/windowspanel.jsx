@@ -39,8 +39,6 @@ export default class WindowsPanel extends Component {
   makeState(tabs, fallbackTab) {
     const index = this.getActiveTabIndex(tabs);
 
-    console.log('state', index, tabs.length);
-
     return {
       focusedTabIndex: index,
       focusedTabId: (tabs[index] || fallbackTab).id,
