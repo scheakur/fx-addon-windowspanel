@@ -143,7 +143,7 @@ export default class WindowsPanel extends Component {
       return;
     }
 
-    const handled = this._handleKeys(event.keyCode);
+    const handled = this._handleKeys(event.key, event.ctrlKey);
 
     if (handled) {
       event.preventDefault();
@@ -151,15 +151,15 @@ export default class WindowsPanel extends Component {
   }
 
 
-  _handleKeys(keyCode) {
-    switch (keyCode) {
-    case 13:
+  _handleKeys(key, ctrl) {
+    switch (true) {
+    case key === 'Enter':
       this.select(this.state.focusedTabId);
       return true;
-    case 38:
+    case key === 'ArrowUp' || (key === 'k' && ctrl):
       this.focusPrevTab();
       return true;
-    case 40:
+    case key === 'ArrowDown' || (key === 'j' && ctrl):
       this.focusNextTab();
       return true;
     }
