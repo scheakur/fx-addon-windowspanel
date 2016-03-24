@@ -40,8 +40,8 @@ export default class SearchBox extends Component {
     if (!this.isComposing) {
       const val = this.getValue();
       if (val !== this.oldValue) {
-        this.props.onSearch(val);
         this.oldValue = val;
+        this.props.onSearch(val);
       }
     }
   }

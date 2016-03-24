@@ -172,6 +172,9 @@ export default class WindowsPanel extends Component {
 
 
   getPosition(tab) {
+    if (!tab) {
+      return 0;
+    }
     const elem = this.refs.tabs.querySelector(`[data-id=tab-${tab.id}]`);
     if (!elem) {
       return 0;
