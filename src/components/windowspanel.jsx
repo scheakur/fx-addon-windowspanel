@@ -2,12 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import SearchBox from './searchbox';
 import classnames from 'classnames';
 
+import 'react-virtualized/styles.css';
+import { VirtualScroll } from 'react-virtualized'
+
 export default class WindowsPanel extends Component {
 
   constructor(props) {
     super(props);
     this.select = this.select.bind(this);
     this.search = this.search.bind(this);
+    this.renderTab = this.renderTab.bind(this);
     this.handleKeys = this.handleKeys.bind(this);
 
     this.state = this.makeState(props.tabs, props.tabs[0]);
@@ -183,32 +187,39 @@ export default class WindowsPanel extends Component {
   }
 
 
-  renderTabs() {
+  renderTab(index) {
     const focusedId = this.state.focusedTabId;
+    const tab = this.state.visibleTabs[index];
 
-    return this.state.visibleTabs.map((tab, index) => {
-      const className = classnames({
-        'tab': true,
-        'focused': tab.id === focusedId,
-      });
-
-      return (
-        <div key={`tab-${tab.id}`} data-id={`tab-${tab.id}`} className={className} onClick={this.select.bind(this, tab.id)}>
-          <div className="favicon"><img src={tab.favicon} width={16} height={16}/></div>
-          <div className="title">{tab.title}</div>
-          <div className="url">{tab.url}</div>
-        </div>
-      );
+    const className = classnames({
+      'tab': true,
+      'focused': tab.id === focusedId,
     });
+
+    return (
+      <div key={`tab-${tab.id}`} data-id={`tab-${tab.id}`} className={className} onClick={this.select.bind(this, tab.id)}>
+        <div className="favicon"><img src={tab.favicon} width={16} height={16}/></div>
+        <div className="title">{tab.title}</div>
+        <div className="url">{tab.url}</div>
+      </div>
+    );
   }
 
 
   render() {
-    const tabs = this.renderTabs();
     return (
       <div className="windowspanel">
         <SearchBox ref="search" onSearch={this.search}/>
-        <div ref="tabs" className="tabs">{tabs}</div>
+        <div ref="tabs" className="tabs">
+          <VirtualScroll
+            width={598}
+            height={556}
+            rowsCount={this.state.visibleTabs.length}
+            rowHeight={56}
+            rowRenderer={this.renderTab}
+            scrollToIndex={this.state.focusedTabIndex}
+          />
+        </div>
       </div>
     );
   }
