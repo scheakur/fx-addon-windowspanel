@@ -14,7 +14,7 @@
     "jetpack"
   ],
   "scripts": {
-    "bundle": "webpack -p --config=webpack.release.config.js",
+    "bundle": "webpack -p --config=webpack.release.config.js && jpm xpi",
     "watch": "webpack -d --watch --progress",
     "start": "jpm run --debug"
   },
@@ -28,6 +28,7 @@
     "eslint": "^2.4.0",
     "eslint-config-airbnb": "^6.1.0",
     "eslint-plugin-react": "^4.2.3",
+    "strip-loader": "^0.1.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.14"
   },
