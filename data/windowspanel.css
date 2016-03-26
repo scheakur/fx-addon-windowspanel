@@ -1,3 +1,8 @@
+html {
+  background-color: #fff;
+  font-family: sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +13,8 @@
   flex-direction: column;
   box-sizing: border-box;
   height: 596px;
+  font-size: 12px;
+  font-family: "Hiragino Kaku Gothic ProN", Meiryo, YuGothic, sans-serif;
 }
 
 .tabs {
@@ -16,16 +23,42 @@
 }
 
 .tab {
+  display: flex;
+  box-sizing: border-box;
+  height: 48px;
   padding: 5px;
 }
 
 .tab.focused {
-  background-color: #fce4ec;
+  background-color: #e3f2fd;
+}
+
+.tab .favicon {
+  display: flex;
+  align-items: center;
+  padding-right: 5px;
+}
+
+.tab .text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .tab .title, .tab .url {
   overflow: hidden;
   white-space: nowrap;
+  line-height: 140%;
+}
+
+.tab .title {
+  margin-bottom: 3px;
+}
+
+.tab .url {
+  font-family: Monaco, monospace;
+  color: #2196f3;
 }
 
 .search-container {

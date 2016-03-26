@@ -198,9 +198,13 @@ export default class WindowsPanel extends Component {
 
     return (
       <div key={`tab-${tab.id}`} data-id={`tab-${tab.id}`} className={className} onClick={this.select.bind(this, tab.id)}>
-        <div className="favicon"><img src={tab.favicon} width={16} height={16}/></div>
-        <div className="title">{tab.title}</div>
-        <div className="url">{tab.url}</div>
+        <div className="favicon">
+          <img src={tab.favicon} width={16} height={16}/>
+        </div>
+        <div className="text">
+          <div className="title">{tab.title}</div>
+          <div className="url">{tab.url}</div>
+        </div>
       </div>
     );
   }
@@ -215,7 +219,7 @@ export default class WindowsPanel extends Component {
             width={598}
             height={556}
             rowsCount={this.state.visibleTabs.length}
-            rowHeight={56}
+            rowHeight={48}
             rowRenderer={this.renderTab}
             scrollToIndex={this.state.focusedTabIndex}
           />
