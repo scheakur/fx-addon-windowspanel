@@ -17,6 +17,16 @@ html {
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, YuGothic, sans-serif;
 }
 
+.controller {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.num {
+  padding: 5px;
+}
+
 .tabs {
   flex: 1;
   overflow: auto;

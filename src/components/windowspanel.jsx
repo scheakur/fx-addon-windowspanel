@@ -213,7 +213,10 @@ export default class WindowsPanel extends Component {
   render() {
     return (
       <div className="windowspanel">
-        <SearchBox ref="search" onSearch={this.search}/>
+        <div className="controller">
+          <SearchBox ref="search" onSearch={this.search}/>
+          <div className="num">{this.state.visibleTabs.length}/{this.props.tabs.length}</div>
+        </div>
         <div ref="tabs" className="tabs">
           <VirtualScroll
             width={598}
