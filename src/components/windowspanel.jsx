@@ -112,6 +112,11 @@ export default class WindowsPanel extends Component {
   }
 
 
+  closeTab(id) {
+    this.props.emit('close', id);
+  }
+
+
   getActiveTabIndex(tabs) {
     let index = 0;
     for (let tab of tabs) {
@@ -163,6 +168,9 @@ export default class WindowsPanel extends Component {
       return true;
     case key === 'ArrowDown' || (key === 'j' && ctrl):
       this.focusNextTab();
+      return true;
+    case key === 'Backspace' && ctrl:
+      this.closeTab(this.state.focusedTabId);
       return true;
     }
 

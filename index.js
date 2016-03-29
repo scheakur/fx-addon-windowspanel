@@ -146,6 +146,9 @@ function closeTab(id) {
   for (let tab of tabs) {
     if (tab.id === id) {
       tab.close();
+      if (panel.isShowing) {
+        panel.port.emit('show', convert(tabs));
+      }
       return;
     }
   }
