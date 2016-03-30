@@ -16,8 +16,8 @@
     <script>
       const tabs = Array(100).fill(0).map((_, i) => ({
         id: `-1-${i}`,
-        url: `http://foo${i}.example.com/bar${i}`,
-        title: `page ${i}`,
+        url: `http://foo${i}.example.com/bar${i}/${'o'.repeat(i)}`,
+        title: `page ${i} ${'o'.repeat(i)}`,
         favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAArklEQVR42t2TMQ4CIRBF9xBGEw5AkBJKY7uhcHsCjfEkHkJDLOWiyDeTyWoFwcriMcD8/wMkTKWUId6DMUYrpa5Symddb1CB9/4IaM09aOHhgLpxyzlf6jxChErsibjuQQsPB1C6hKARCQ8HcHof8eMEvQHwDAX89grOuVNvADx/9AbjJ7DWPkIIh1YztPBwQErprLW+t34maOFZv8G2MlcWIcSESuyI5as3k2d6AZGetvsfEgPvAAAAAElFTkSuQmCC',
       }));
 
