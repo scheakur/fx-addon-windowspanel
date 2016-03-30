@@ -3,7 +3,8 @@ import SearchBox from './searchbox';
 import classnames from 'classnames';
 
 import 'react-virtualized/styles.css';
-import { VirtualScroll } from 'react-virtualized'
+import { VirtualScroll } from 'react-virtualized';
+import Close from 'react-icons/lib/md/close';
 
 export default class WindowsPanel extends Component {
 
@@ -212,6 +213,11 @@ export default class WindowsPanel extends Component {
         <div className="text">
           <div className="title">{tab.title}</div>
           <div className="url">{tab.url}</div>
+        </div>
+        <div className="button-container">
+          <div className="button close" onClick={this.closeTab.bind(this, tab.id)}>
+            <Close size={16}/>
+          </div>
         </div>
       </div>
     );

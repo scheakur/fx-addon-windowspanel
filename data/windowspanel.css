@@ -49,11 +49,33 @@ html {
   padding-right: 5px;
 }
 
+.tab .button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab .button {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.tab .close.button:hover {
+  background-color: #2196f3;
+}
+
+.tab .close.button:hover svg {
+  fill: #fff;
+}
+
 .tab .text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  flex: 1;
 }
 
 .tab .title, .tab .url {
