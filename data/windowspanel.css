@@ -60,6 +60,7 @@ html {
   height: 20px;
   text-align: center;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .tab .close.button:hover {
@@ -76,6 +77,7 @@ html {
   align-items: flex-start;
   justify-content: center;
   flex: 1;
+  overflow: hidden;
 }
 
 .tab .title, .tab .url {
