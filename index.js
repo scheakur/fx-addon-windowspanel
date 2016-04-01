@@ -171,3 +171,9 @@ tabs.on('activate', (tab) => {
     panel.port.emit('show', convert(tabs));
   }
 });
+
+tabs.on('ready', (tab) => {
+  if (panel.isShowing) {
+    panel.port.emit('show', convert(tabs));
+  }
+});
