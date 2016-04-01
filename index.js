@@ -125,7 +125,6 @@ function newTabData(tab, activeTab) {
     title: tab.title,
     url: tab.url,
     active: (activeTab.id === tab.id),
-    visible: true
   };
   setFavicon(tab, tabData);
   return tabData;
