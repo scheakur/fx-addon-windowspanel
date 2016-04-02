@@ -146,11 +146,17 @@ function closeTab(id) {
     if (tab.id === id) {
       tab.close();
       if (panel.isShowing) {
-        panel.port.emit('show', convert(tabs));
+        emitShow();
       }
       return;
     }
   }
+}
+
+function emitShow() {
+  panel.port.emit('show', {
+    tabs: convert(tabs),
+  });
 }
 
 
@@ -158,7 +164,7 @@ panel.port.on('select', selectTab);
 panel.port.on('close', closeTab);
 
 panel.on('show', () => {
-  panel.port.emit('show', convert(tabs));
+  emitShow();
 });
 
 panel.on('hide', () => {
@@ -167,12 +173,12 @@ panel.on('hide', () => {
 
 tabs.on('activate', (tab) => {
   if (panel.isShowing) {
-    panel.port.emit('show', convert(tabs));
+    emitShow();
   }
 });
 
 tabs.on('ready', (tab) => {
   if (panel.isShowing) {
-    panel.port.emit('show', convert(tabs));
+    emitShow();
   }
 });

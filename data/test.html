@@ -23,7 +23,9 @@
 
       tabs[50].active = true;
 
-      self.port.emit('show', tabs);
+      self.port.emit('show', {
+        tabs: tabs,
+      });
     </script>
   </body>
 </html>
