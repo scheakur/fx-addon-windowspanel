@@ -15,12 +15,12 @@ export default class WindowsPanel extends Component {
     this.renderTab = this.renderTab.bind(this);
     this.handleKeys = this.handleKeys.bind(this);
 
-    this.state = this.makeState(props.tabs, props.tabs[0]);
+    this.state = this.makeState(props.tabs, props.tabs[0], props.focusedTabIndex);
   }
 
   componentWillReceiveProps(props) {
     const tabs = this.filter(props.tabs, this.refs.search.getValue());
-    this.setState(this.makeState(tabs, props.tabs[0]));
+    this.setState(this.makeState(tabs, props.tabs[0], props.focusedTabIndex));
   }
 
 
@@ -41,14 +41,27 @@ export default class WindowsPanel extends Component {
   }
 
 
-  makeState(tabs, fallbackTab) {
-    const index = this.getActiveTabIndex(tabs);
+  makeState(tabs, fallbackTab, focusedTabIndex) {
+    const index = this.chooseFocusedTabIndex(focusedTabIndex, tabs);
 
     return {
       focusedTabIndex: index,
       focusedTabId: (tabs[index] || fallbackTab).id,
       visibleTabs: tabs,
     };
+  }
+
+
+  chooseFocusedTabIndex(focusedTabIndex, tabs) {
+    if (focusedTabIndex === null) {
+      return this.getActiveTabIndex(tabs);
+    }
+
+    if (focusedTabIndex > tabs.length - 1) {
+      return tabs.length - 1;
+    }
+
+    return focusedTabIndex;
   }
 
 
@@ -113,8 +126,8 @@ export default class WindowsPanel extends Component {
   }
 
 
-  closeTab(id) {
-    this.props.emit('close', id);
+  closeTab(id, index) {
+    this.props.emit('close', id, index);
   }
 
 
@@ -171,7 +184,7 @@ export default class WindowsPanel extends Component {
       this.focusNextTab();
       return true;
     case key === 'Backspace' && ctrl:
-      this.closeTab(this.state.focusedTabId);
+      this.closeTab(this.state.focusedTabId, this.state.focusedTabIndex);
       return true;
     }
 
@@ -215,7 +228,7 @@ export default class WindowsPanel extends Component {
           <div className="url">{tab.url}</div>
         </div>
         <div className="button-container">
-          <div className="button close" onClick={this.closeTab.bind(this, tab.id)}>
+          <div className="button close" onClick={this.closeTab.bind(this, tab.id, index)}>
             <Close size={16}/>
           </div>
         </div>
@@ -251,4 +264,5 @@ WindowsPanel.propTypes = {
   emit: PropTypes.func,
   on: PropTypes.func,
   tabs: PropTypes.array,
+  focusedTabIndex: PropTypes.number,
 };

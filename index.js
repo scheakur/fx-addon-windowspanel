@@ -141,21 +141,22 @@ function selectTab(id) {
 }
 
 
-function closeTab(id) {
+function closeTab(id, focusedTabIndex) {
   for (let tab of tabs) {
     if (tab.id === id) {
       tab.close();
       if (panel.isShowing) {
-        emitShow();
+        emitShow(focusedTabIndex);
       }
       return;
     }
   }
 }
 
-function emitShow() {
+function emitShow(focusedTabIndex) {
   panel.port.emit('show', {
     tabs: convert(tabs),
+    focusedTabIndex: focusedTabIndex,
   });
 }
 
