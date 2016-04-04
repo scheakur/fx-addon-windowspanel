@@ -173,17 +173,22 @@ export default class WindowsPanel extends Component {
 
 
   _handleKeys(key, ctrl) {
-    switch (true) {
-    case key === 'Enter':
+    if (key === 'Enter') {
       this.select(this.state.focusedTabId);
       return true;
-    case key === 'ArrowUp' || (key === 'k' && ctrl):
+    }
+
+    if (key === 'ArrowUp' || (key === 'k' && ctrl)) {
       this.focusPrevTab();
       return true;
-    case key === 'ArrowDown' || (key === 'j' && ctrl):
+    }
+
+    if (key === 'ArrowDown' || (key === 'j' && ctrl)) {
       this.focusNextTab();
       return true;
-    case key === 'Backspace' && ctrl:
+    }
+
+    if (key === 'Backspace' && ctrl) {
       this.closeTab(this.state.focusedTabId, this.state.focusedTabIndex);
       return true;
     }
