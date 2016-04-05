@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import SearchBox from './searchbox';
-import classnames from 'classnames';
-
+import Tab from './tab';
 import 'react-virtualized/styles.css';
 import { VirtualScroll } from 'react-virtualized';
-import Close from 'react-icons/lib/md/close';
 
 export default class WindowsPanel extends Component {
 
@@ -218,26 +216,12 @@ export default class WindowsPanel extends Component {
     const focusedId = this.state.focusedTabId;
     const tab = this.state.visibleTabs[index];
 
-    const className = classnames({
-      'tab': true,
-      'focused': tab.id === focusedId,
-    });
-
     return (
-      <div key={`tab-${tab.id}`} data-id={`tab-${tab.id}`} className={className} onClick={this.select.bind(this, tab.id)}>
-        <div className="favicon">
-          <img src={tab.favicon} width={16} height={16}/>
-        </div>
-        <div className="text">
-          <div className="title">{tab.title}</div>
-          <div className="url">{tab.url}</div>
-        </div>
-        <div className="button-container">
-          <div className="button close" onClick={this.closeTab.bind(this, tab.id, index)}>
-            <Close size={16}/>
-          </div>
-        </div>
-      </div>
+      <Tab
+        {...tab}
+        focused={tab.id === focusedId}
+        onSelect={this.select.bind(this, tab.id)}
+        onClose={this.closeTab.bind(this, tab.id, index)}/>
     );
   }
 
