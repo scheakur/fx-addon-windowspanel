@@ -69,6 +69,7 @@ export default class WindowsPanel extends Component {
 
 
   select(id) {
+    this.props.emit('hide');
     this.props.emit('select', id);
   }
 

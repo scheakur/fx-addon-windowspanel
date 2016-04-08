@@ -50,7 +50,7 @@ button.on('click', function(state) {
     return;
   }
   if (state.checked) {
-    openPanel();
+    showPanel();
   }
 });
 
@@ -85,8 +85,13 @@ function togglePanel() {
 }
 
 
-function openPanel() {
+function showPanel() {
   panel.show();
+}
+
+
+function hidePanel() {
+  panel.hide();
 }
 
 
@@ -163,6 +168,7 @@ function emitShow(focusedTabIndex) {
 
 panel.port.on('select', selectTab);
 panel.port.on('close', closeTab);
+panel.port.on('hide', hidePanel);
 
 panel.on('show', () => {
   emitShow();
