@@ -158,6 +158,7 @@ function closeTab(id, focusedTabIndex) {
   }
 }
 
+
 function emitShow(focusedTabIndex) {
   panel.port.emit('show', {
     tabs: convert(tabs),
@@ -166,26 +167,20 @@ function emitShow(focusedTabIndex) {
 }
 
 
+function updatePanel() {
+  if (panel.isShowing) {
+    emitShow();
+  }
+}
+
 panel.port.on('select', selectTab);
 panel.port.on('close', closeTab);
 panel.port.on('hide', hidePanel);
 
-panel.on('show', () => {
-  emitShow();
-});
-
+panel.on('show', emitShow);
 panel.on('hide', () => {
  panel.port.emit('hide');
 });
 
-tabs.on('activate', (tab) => {
-  if (panel.isShowing) {
-    emitShow();
-  }
-});
-
-tabs.on('ready', (tab) => {
-  if (panel.isShowing) {
-    emitShow();
-  }
-});
+tabs.on('activate', updatePanel);
+tabs.on('ready', updatePanel);
