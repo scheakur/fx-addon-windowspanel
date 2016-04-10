@@ -5,6 +5,7 @@
   "description": "Windows panel for Firefox",
   "main": "index.js",
   "author": "scheakur",
+  "icon": "resource://@fx-addon-windowspanel/data/windowspanel-64.png",
   "engines": {
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
