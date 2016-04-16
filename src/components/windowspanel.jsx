@@ -231,6 +231,7 @@ export default class WindowsPanel extends Component {
     return (
       <div className="windowspanel">
         <div className="controller">
+          <img className="icon" src="./windowspanel-32.png"/>
           <SearchBox ref="search" onSearch={this.search}/>
           <div className="num">{this.state.visibleTabs.length}/{this.props.tabs.length}</div>
         </div>

@@ -23,6 +23,12 @@ html {
   border-bottom: 1px solid #eee;
 }
 
+.icon {
+  width: 24px;
+  height: 24px;
+  padding: 6px 2px 6px 6px;
+}
+
 .num {
   padding: 5px;
 }
