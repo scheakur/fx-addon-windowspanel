@@ -227,24 +227,38 @@ export default class WindowsPanel extends Component {
   }
 
 
+  renderController() {
+    return (
+      <div className="controller">
+        <img className="icon" src="./windowspanel-32.png"/>
+        <SearchBox ref="search" onSearch={this.search}/>
+        <div className="num">{this.state.visibleTabs.length}/{this.props.tabs.length}</div>
+      </div>
+    );
+  }
+
+
+  renderTabs() {
+    return (
+      <div ref="tabs" className="tabs">
+        <VirtualScroll
+          width={598}
+          height={556}
+          rowsCount={this.state.visibleTabs.length}
+          rowHeight={48}
+          rowRenderer={this.renderTab}
+          scrollToIndex={this.state.focusedTabIndex}
+        />
+      </div>
+    );
+  }
+
+
   render() {
     return (
       <div className="windowspanel">
-        <div className="controller">
-          <img className="icon" src="./windowspanel-32.png"/>
-          <SearchBox ref="search" onSearch={this.search}/>
-          <div className="num">{this.state.visibleTabs.length}/{this.props.tabs.length}</div>
-        </div>
-        <div ref="tabs" className="tabs">
-          <VirtualScroll
-            width={598}
-            height={556}
-            rowsCount={this.state.visibleTabs.length}
-            rowHeight={48}
-            rowRenderer={this.renderTab}
-            scrollToIndex={this.state.focusedTabIndex}
-          />
-        </div>
+        {this.renderController()}
+        {this.renderTabs()}
       </div>
     );
   }
