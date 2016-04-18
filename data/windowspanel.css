@@ -20,7 +20,7 @@ html {
 .controller {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ccc;
   background-color: #eceff1;
 }
 
