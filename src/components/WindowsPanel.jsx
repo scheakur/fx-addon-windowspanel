@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import SearchBox from './searchbox';
-import Tab from './tab';
+import SearchBox from './SearchBox';
+import Tab from './Tab';
 import 'react-virtualized/styles.css';
 import { VirtualScroll } from 'react-virtualized';
 

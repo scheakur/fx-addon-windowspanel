@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WindowsPanel from './components/windowspanel.jsx';
+import WindowsPanel from './components/WindowsPanel.jsx';
 
 self.port.on('show', ({ tabs, focusedTabIndex }) => {
   console.log('show', tabs.length);
