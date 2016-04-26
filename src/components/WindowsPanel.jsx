@@ -205,10 +205,13 @@ export default class WindowsPanel extends Component {
     if (!tab) {
       return 0;
     }
+
     const elem = this.refs.tabs.querySelector(`[data-id=tab-${tab.id}]`);
+
     if (!elem) {
       return 0;
     }
+
     return elem.offsetTop - 40;
   }
 
@@ -228,11 +231,13 @@ export default class WindowsPanel extends Component {
 
 
   renderController() {
+    const num = `${this.state.visibleTabs.length}/${this.props.tabs.length}`;
+
     return (
       <div className="controller">
         <img className="icon" src="./windowspanel-32.png"/>
         <SearchBox ref="search" onSearch={this.search}/>
-        <div className="num">{this.state.visibleTabs.length}/{this.props.tabs.length}</div>
+        <div className="num">{num}</div>
       </div>
     );
   }
