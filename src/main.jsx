@@ -8,11 +8,10 @@ self.port.on('show', ({ tabs, focusedTabIndex }) => {
   const on = self.port.on.bind(self.port);
   const index = (focusedTabIndex === undefined) ? null : Number(focusedTabIndex);
 
-  ReactDOM.render(
-    <WindowsPanel
-      emit={emit}
-      on={on}
-      tabs={tabs}
-      focusedTabIndex={index}/>,
-    document.getElementById('container'));
+  const windowsPanel = (
+    <WindowsPanel emit={emit} on={on} tabs={tabs} focusedTabIndex={index}/>
+  );
+  const container = document.getElementById('container');
+
+  ReactDOM.render(windowsPanel, container);
 });
