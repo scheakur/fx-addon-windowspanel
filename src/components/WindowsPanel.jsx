@@ -107,20 +107,22 @@ export default class WindowsPanel extends Component {
   focusNextTab() {
     const index = this.state.focusedTabIndex;
     const nextIndex = (index === this.state.visibleTabs.length - 1) ? 0 : index + 1;
-    const nextTab = this.state.visibleTabs[nextIndex];
-    this.setState({
-      focusedTabIndex: nextIndex,
-      focusedTabId: nextTab.id,
-    });
+    this._focusTab(nextIndex);
   }
+
 
   focusPrevTab() {
     const index = this.state.focusedTabIndex;
     const prevIndex = (index === 0) ? this.state.visibleTabs.length - 1 : index - 1;
-    const prevTab =  this.state.visibleTabs[prevIndex];
+    this._focusTab(prevIndex);
+  }
+
+
+  _focusTab(index) {
+    const tab =  this.state.visibleTabs[index];
     this.setState({
-      focusedTabIndex: prevIndex,
-      focusedTabId: prevTab.id,
+      focusedTabIndex: index,
+      focusedTabId: tab.id,
     });
   }
 
