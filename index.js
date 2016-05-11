@@ -38,12 +38,12 @@ const button = require('sdk/ui/button/toggle').ToggleButton({
 });
 
 
-panel.on('hide', function(state) {
+panel.on('hide', (state) => {
   preventOpenTemporary();
   buttonOff();
 });
 
-button.on('click', function(state) {
+button.on('click', (state) => {
   if (openIsPrevented()) {
     breakPreventer();
     buttonOff();
@@ -55,76 +55,76 @@ button.on('click', function(state) {
 });
 
 
-function preventOpenTemporary() {
+const preventOpenTemporary = () => {
   if (openPanelPreventer !== null) {
     timers.clearTimeout(openPanelPreventer);
   }
-  openPanelPreventer = timers.setTimeout(function() {
+  openPanelPreventer = timers.setTimeout(() => {
     openPanelPreventer = null;
   }, 300);
-}
+};
 
 
-function openIsPrevented() {
+const openIsPrevented = () => {
   return openPanelPreventer !== null;
-}
+};
 
 
-function breakPreventer() {
+const breakPreventer = () => {
   timers.clearTimeout(openPanelPreventer);
   openPanelPreventer = null;
-}
+};
 
 
-function togglePanel() {
+const togglePanel = () => {
   if (panel.isShowing) {
     panel.hide();
   } else {
     panel.show();
   }
-}
+};
 
 
-function showPanel() {
+const showPanel = () => {
   panel.show();
-}
+};
 
 
-function hidePanel() {
+const hidePanel = () => {
   panel.hide();
-}
+};
 
 
-function buttonOff() {
+const buttonOff = () => {
   button.state('window', {
     checked: false
   });
-}
+};
 
 
 const tofu = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAArklEQVR42t2TMQ4CIRBF9xBGEw5AkBJKY7uhcHsCjfEkHkJDLOWiyDeTyWoFwcriMcD8/wMkTKWUId6DMUYrpa5Symddb1CB9/4IaM09aOHhgLpxyzlf6jxChErsibjuQQsPB1C6hKARCQ8HcHof8eMEvQHwDAX89grOuVNvADx/9AbjJ7DWPkIIh1YztPBwQErprLW+t34maOFZv8G2MlcWIcSESuyI5as3k2d6AZGetvsfEgPvAAAAAElFTkSuQmCC';
 
 
-function setFavicon(tab, tabData) {
-  favicon.getFavicon(tab).then(function(url) {
+const setFavicon = (tab, tabData) => {
+  favicon.getFavicon(tab).then((url) => {
     tabData.favicon = url;
-  }, function() {
+  }, () => {
     tabData.favicon = tofu;
   });
-}
+};
 
 
-function convert(tabs) {
+const convert = (tabs) => {
   const converted = [];
   const activeTab = tabs.activeTab;
   for (let tab of tabs) {
     converted.push(newTabData(tab, activeTab));
   }
   return converted;
-}
+};
 
 
-function newTabData(tab, activeTab) {
+const newTabData = (tab, activeTab) => {
   const tabData = {
     id: tab.id,
     title: tab.title,
@@ -133,20 +133,20 @@ function newTabData(tab, activeTab) {
   };
   setFavicon(tab, tabData);
   return tabData;
-}
+};
 
 
-function selectTab(id) {
+const selectTab = (id) => {
   for (let tab of tabs) {
     if (tab.id === id) {
       tab.activate();
       return;
     }
   }
-}
+};
 
 
-function closeTab(id, focusedTabIndex) {
+const closeTab = (id, focusedTabIndex) => {
   for (let tab of tabs) {
     if (tab.id === id) {
       tab.close();
@@ -156,22 +156,22 @@ function closeTab(id, focusedTabIndex) {
       return;
     }
   }
-}
+};
 
 
-function emitShow(focusedTabIndex) {
+const emitShow = (focusedTabIndex) => {
   panel.port.emit('show', {
     tabs: convert(tabs),
     focusedTabIndex: focusedTabIndex,
   });
-}
+};
 
 
-function updatePanel() {
+const updatePanel = () => {
   if (panel.isShowing) {
     emitShow();
   }
-}
+};
 
 panel.port.on('select', selectTab);
 panel.port.on('close', closeTab);
