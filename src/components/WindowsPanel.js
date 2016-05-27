@@ -11,6 +11,7 @@ export default class WindowsPanel extends Component {
     this.select = this.select.bind(this);
     this.search = this.search.bind(this);
     this.renderTab = this.renderTab.bind(this);
+    this.removeDuplicatedTabs = this.removeDuplicatedTabs.bind(this);
     this.handleKeys = this.handleKeys.bind(this);
 
     this.state = this.makeState(props.tabs, props.tabs[0], props.focusedTabIndex);
@@ -132,6 +133,25 @@ export default class WindowsPanel extends Component {
   }
 
 
+  removeDuplicatedTabs() {
+    const urls = {};
+    const ids = [];
+    for (let tab of this.props.tabs) {
+      if (urls[tab.url]) {
+        ids.push(tab.id);
+        continue;
+      }
+      urls[tab.url] = true;
+    }
+
+    if (ids.length === 0) {
+      return;
+    }
+
+    const index = this.state.focusedTabIndex;
+    this.props.emit('closeMulti', ids, index);
+  }
+
   getActiveTabIndex(tabs) {
     let index = 0;
     for (let tab of tabs) {
@@ -239,6 +259,7 @@ export default class WindowsPanel extends Component {
       <div className="controller">
         <img className="icon" src="./windowspanel-32.png"/>
         <SearchBox ref="search" onSearch={this.search}/>
+        <img className="icon" src="./remove.png" title="Remove duplicated tabs" onClick={this.removeDuplicatedTabs}/>
         <div className="num">{num}</div>
       </div>
     );

@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   context: path.join(__dirname, './src'),
   entry: {
-    main: './main.jsx',
+    main: './main.js',
   },
   output: {
     path: path.join(__dirname, './data'),

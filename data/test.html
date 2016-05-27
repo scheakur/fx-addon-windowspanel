@@ -14,14 +14,24 @@
       </div>
     </div>
     <script>
+
+      const favicon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAArklEQVR42t2TMQ4CIRBF9xBGEw5AkBJKY7uhcHsCjfEkHkJDLOWiyDeTyWoFwcriMcD8/wMkTKWUId6DMUYrpa5Symddb1CB9/4IaM09aOHhgLpxyzlf6jxChErsibjuQQsPB1C6hKARCQ8HcHof8eMEvQHwDAX89grOuVNvADx/9AbjJ7DWPkIIh1YztPBwQErprLW+t34maOFZv8G2MlcWIcSESuyI5as3k2d6AZGetvsfEgPvAAAAAElFTkSuQmCC';
+
       const tabs = Array(100).fill(0).map((_, i) => ({
         id: `-1-${i}`,
         url: `http://foo${i}.example.com/bar${i}/${'o'.repeat(i)}`,
         title: `page ${i} ${'o'.repeat(i)}`,
-        favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAArklEQVR42t2TMQ4CIRBF9xBGEw5AkBJKY7uhcHsCjfEkHkJDLOWiyDeTyWoFwcriMcD8/wMkTKWUId6DMUYrpa5Symddb1CB9/4IaM09aOHhgLpxyzlf6jxChErsibjuQQsPB1C6hKARCQ8HcHof8eMEvQHwDAX89grOuVNvADx/9AbjJ7DWPkIIh1YztPBwQErprLW+t34maOFZv8G2MlcWIcSESuyI5as3k2d6AZGetvsfEgPvAAAAAElFTkSuQmCC',
+        favicon: favicon,
       }));
 
       tabs[50].active = true;
+
+      tabs.push({
+        id: `-1-1-x`,
+        url: `http://foo1.example.com/bar1/o`,
+        title: `page 1 o`,
+        favicon: favicon,
+      })
 
       self.port.emit('show', {
         tabs: tabs,

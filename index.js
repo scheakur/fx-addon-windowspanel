@@ -159,6 +159,22 @@ const closeTab = (id, focusedTabIndex) => {
 };
 
 
+const closeTabs = (ids, focusedTabIndex) => {
+  for (let id of ids) {
+    for (let tab of tabs) {
+      if (tab.id === id) {
+        tab.close();
+        break;
+      }
+    }
+  }
+
+  if (panel.isShowing) {
+    emitShow(focusedTabIndex);
+  }
+}
+
+
 const emitShow = (focusedTabIndex) => {
   panel.port.emit('show', {
     tabs: convert(tabs),
@@ -175,6 +191,7 @@ const updatePanel = () => {
 
 panel.port.on('select', selectTab);
 panel.port.on('close', closeTab);
+panel.port.on('closeMulti', closeTabs);
 panel.port.on('hide', hidePanel);
 
 panel.on('show', emitShow);
