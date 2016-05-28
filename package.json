@@ -17,7 +17,7 @@
   "scripts": {
     "bundle": "webpack -p --config=webpack.release.config.js && jpm xpi",
     "watch": "webpack -d --watch --progress",
-    "start": "jpm run --debug"
+    "start": "jpm run"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
