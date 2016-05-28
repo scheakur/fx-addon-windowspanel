@@ -11,6 +11,7 @@ export default class WindowsPanel extends Component {
     this.select = this.select.bind(this);
     this.search = this.search.bind(this);
     this.renderTab = this.renderTab.bind(this);
+    this.sortTabs = this.sortTabs.bind(this);
     this.removeDuplicatedTabs = this.removeDuplicatedTabs.bind(this);
     this.handleKeys = this.handleKeys.bind(this);
 
@@ -130,6 +131,11 @@ export default class WindowsPanel extends Component {
 
   closeTab(id, index) {
     this.props.emit('close', id, index);
+  }
+
+
+  sortTabs() {
+    this.props.emit('sort');
   }
 
 
@@ -259,6 +265,7 @@ export default class WindowsPanel extends Component {
       <div className="controller">
         <img className="icon" src="./windowspanel-32.png"/>
         <SearchBox ref="search" onSearch={this.search}/>
+        <img className="icon" src="./sort.png" title="Sort tabs" onClick={this.sortTabs}/>
         <img className="icon" src="./remove.png" title="Remove duplicated tabs" onClick={this.removeDuplicatedTabs}/>
         <div className="num">{num}</div>
       </div>

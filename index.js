@@ -4,6 +4,14 @@ const favicon = require('sdk/places/favicon');
 const timers = require('sdk/timers');
 const { Hotkey } = require('sdk/hotkeys');
 
+const { getMostRecentBrowserWindow } = require('sdk/window/utils');
+const {
+  getActiveTab,
+  getTabBrowser,
+  getTabURL,
+  getTabs,
+} = require('sdk/tabs/utils');
+
 const panel = require('sdk/panel').Panel({
   contentURL: data.url('windowspanel.html'),
   contentScriptFile: [
@@ -42,6 +50,7 @@ panel.on('hide', (state) => {
   preventOpenTemporary();
   buttonOff();
 });
+
 
 button.on('click', (state) => {
   if (openIsPrevented()) {
@@ -115,10 +124,10 @@ const setFavicon = (tab, tabData) => {
 
 
 const convert = (tabs) => {
-  const converted = [];
+  const converted = new Array(tabs.length);
   const activeTab = tabs.activeTab;
   for (let tab of tabs) {
-    converted.push(newTabData(tab, activeTab));
+    converted[tab.index] = newTabData(tab, activeTab);
   }
   return converted;
 };
@@ -175,6 +184,25 @@ const closeTabs = (ids, focusedTabIndex) => {
 }
 
 
+const sortTabs = () => {
+  const win = getMostRecentBrowserWindow();
+  const tabBrowser = getTabBrowser(win);
+  const tabs = getTabs(win);
+
+  tabs.sort((tab1, tab2) => {
+    return getTabURL(tab1) > getTabURL(tab2);
+  })
+
+  tabs.forEach((tab, index) => {
+    tabBrowser.moveTabTo(tab, index);
+  });
+
+  const activeTab = getActiveTab(win);
+
+  emitShow(tabs.indexOf(activeTab));
+};
+
+
 const emitShow = (focusedTabIndex) => {
   panel.port.emit('show', {
     tabs: convert(tabs),
@@ -193,6 +221,7 @@ panel.port.on('select', selectTab);
 panel.port.on('close', closeTab);
 panel.port.on('closeMulti', closeTabs);
 panel.port.on('hide', hidePanel);
+panel.port.on('sort', sortTabs);
 
 panel.on('show', emitShow);
 panel.on('hide', () => {
