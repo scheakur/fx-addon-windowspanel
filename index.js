@@ -199,7 +199,8 @@ const sortTabs = () => {
 
   const activeTab = getActiveTab(win);
 
-  emitShow(tabs.indexOf(activeTab));
+  const focusedTabIndex = tabs.indexOf(activeTab);
+  emitShow((focusedTabIndex < 0) ? 0 : focusedTabIndex);
 };
 
 
