@@ -115,11 +115,13 @@ const tofu = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9h
 
 
 const setFavicon = (tab, tabData) => {
-  favicon.getFavicon(tab).then((url) => {
-    tabData.favicon = url;
-  }, () => {
-    tabData.favicon = tofu;
-  });
+  favicon.getFavicon(tab)
+    .then(url => {
+      tabData.favicon = url;
+    })
+    .catch(() => {
+      tabData.favicon = tofu;
+    });
 };
 
 
