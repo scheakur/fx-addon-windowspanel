@@ -111,7 +111,12 @@ const buttonOff = () => {
 };
 
 
-const tofu = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAArklEQVR42t2TMQ4CIRBF9xBGEw5AkBJKY7uhcHsCjfEkHkJDLOWiyDeTyWoFwcriMcD8/wMkTKWUId6DMUYrpa5Symddb1CB9/4IaM09aOHhgLpxyzlf6jxChErsibjuQQsPB1C6hKARCQ8HcHof8eMEvQHwDAX89grOuVNvADx/9AbjJ7DWPkIIh1YztPBwQErprLW+t34maOFZv8G2MlcWIcSESuyI5as3k2d6AZGetvsfEgPvAAAAAElFTkSuQmCC';
+const tofu = 'data:image/png;base64,'
+  + 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAArklEQVR42t2TMQ4CIRBF9xBGEw'
+  + '5AkBJKY7uhcHsCjfEkHkJDLOWiyDeTyWoFwcriMcD8/wMkTKWUId6DMUYrpa5Symddb1CB9/4I'
+  + 'aM09aOHhgLpxyzlf6jxChErsibjuQQsPB1C6hKARCQ8HcHof8eMEvQHwDAX89grOuVNvADx/9A'
+  + 'bjJ7DWPkIIh1YztPBwQErprLW+t34maOFZv8G2MlcWIcSESuyI5as3k2d6AZGetvsfEgPvAAAA'
+  + 'AElFTkSuQmCC';
 
 
 const setFavicon = (tab, tabData) => {
